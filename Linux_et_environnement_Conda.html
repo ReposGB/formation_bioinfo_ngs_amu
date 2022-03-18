@@ -322,11 +322,11 @@ slide:not(.current) .plotly.html-widget{
 
 <pre class = 'prettyprint lang-bash'>ssh utilisateur@machine_distante #-ajouter X pour rediriger l&#39;écran graphique</pre>
 
-<p>Exemple: Connection sur le <strong>cluster de calcul de l’IFB</strong>: <code>IFB-core</code></p>
+<p>Exemple: Connexion sur le <strong>cluster de calcul de l’IFB</strong>: <code>IFB-core</code></p>
 
 <pre class = 'prettyprint lang-bash'>ssh utilisateur@core.cluster.france-bioinformatique.fr</pre>
 
-<p>Message apparaissant à la <strong>première connection seulement!</strong>. Répondre <code>yes</code>.</p>
+<p>Message apparaissant à la <strong>première connexion seulement!</strong>. Répondre <code>yes</code>.</p>
 
 <pre class = 'prettyprint lang-bash'>The authenticity of host &#39;machine_distante (::1)&#39; can&#39;t be established.
 ECDSA key fingerprint is SHA256:xk24jY2GxbgKTXXavyWtQqjBZwxQUYrt0FpLbrATxW8.
@@ -361,7 +361,7 @@ Are you sure you want to continue connecting (yes/no)?
 
 <p>Et bien sur, votre <strong>moteur de recherche favori est votre ami</strong>!</p>
 
-</article></slide><slide class=""><hgroup><h2>Navigation dans l’arborescence</h2></hgroup><article  id="navigation-dans-larborescence" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Navigation dans l’arborescence avec <code>cd</code></h2></hgroup><article  id="navigation-dans-larborescence-avec-cd" class="smaller ">
 
 <div class="columns-2">
 <p>Chemin personnel à l’arrivée dans le système:</p>
@@ -398,7 +398,7 @@ Are you sure you want to continue connecting (yes/no)?
 
 <pre class = 'prettyprint lang-bash'>popd</pre></div>
 
-</article></slide><slide class=""><hgroup><h2>Lister les fichiers</h2></hgroup><article  id="lister-les-fichiers" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Lister les fichiers avec <code>ls</code></h2></hgroup><article  id="lister-les-fichiers-avec-ls" class="smaller ">
 
 <div class="columns-2">
 <p>Lister les fichiers du répertoire courant</p>
@@ -479,7 +479,7 @@ cp fic1 fic2 rep</pre>
 
 <pre class = 'prettyprint lang-bash'>mv rep1 rep2</pre></div>
 
-</article></slide><slide class=""><hgroup><h2>Copier et renommer un fichier ou un réperoire de manière distante: <code>scp</code></h2></hgroup><article  id="copier-et-renommer-un-fichier-ou-un-réperoire-de-manière-distante-scp" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Copier et renommer un fichier ou un répertoire de manière distante: <code>scp</code></h2></hgroup><article  id="copier-et-renommer-un-fichier-ou-un-répertoire-de-manière-distante-scp" class="smaller ">
 
 <p>Copier un fichier d’une machine distante vers le répertoire courant:</p>
 
@@ -492,35 +492,6 @@ cp fic1 fic2 rep</pre>
 <p>Copier un répertoire vers une machine distante:</p>
 
 <pre class = 'prettyprint lang-bash'>scp -r rep &lt;username&gt;@core.cluster.france-bioinformatique.fr:/shared/home/&lt;username&gt;/ </pre>
-
-</article></slide><slide class=""><hgroup><h2>Commandes d’environnement</h2></hgroup><article  id="commandes-denvironnement" class="smaller ">
-
-<div class="columns-2">
-<p>Qui suis-je ?</p>
-
-<pre class = 'prettyprint lang-bash'>whoami</pre>
-
-<p>Où suis-je ?</p>
-
-<pre class = 'prettyprint lang-bash'>hostname</pre>
-
-<p>Information sur votre compte</p>
-
-<pre class = 'prettyprint lang-bash'>id</pre>
-
-<p><br></p>
-
-<p>Information sur votre Système d’exploitation</p>
-
-<pre class = 'prettyprint lang-bash'>uname (-a)</pre>
-
-<p>Changer votre mot de passe (<strong>Ne le faites pas maintenant!</strong>)</p>
-
-<pre class = 'prettyprint lang-bash'>passwd</pre>
-
-<p>Qui travaille en ce moment sur le système ?</p>
-
-<pre class = 'prettyprint lang-bash'>w ou who</pre></div>
 
 </article></slide><slide class=""><hgroup><h2>Customiser son terminal: alias</h2></hgroup><article  id="customiser-son-terminal-alias" class="smaller ">
 
@@ -552,68 +523,6 @@ rm=&#39;rm -i&#39; (interactive)</pre>
 
 <pre class = 'prettyprint lang-bash'>ls -l &quot;../bin&quot;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Métacaractères/Jokers</h2></hgroup><article  id="métacaractèresjokers" class="smaller ">
-
-<table class = 'rmdtable'>
-<tr class="header">
-<th align="left">Caractère</th>
-<th align="left">Utilisation</th>
-</tr>
-<tr class="odd">
-<td align="left"><code>*</code></td>
-<td align="left">toute chaîne de caractères, potentiellement vide</td>
-</tr>
-<tr class="even">
-<td align="left"><code>?</code></td>
-<td align="left">exactement un caractère</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>{v1,v2,v3}</code></td>
-<td align="left">exactement un caractère, soit <strong>v1</strong>, soit <strong>v2</strong>, soit <strong>v3</strong></td>
-</tr>
-<tr class="even">
-<td align="left"><code>{v1..v2}</code></td>
-<td align="left">exactement un caractère, entre <strong>v1</strong> à <strong>v2</strong></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>{v1..v2..v3}</code></td>
-<td align="left">exactement un caractère, entre <strong>v1</strong> à <strong>v2</strong> par pas de <strong>v3</strong></td>
-</tr>
-</table>
-
-<p>Exemples:</p>
-
-<pre class = 'prettyprint lang-bash'>echo {a..c}{1,9} {a..c}*
-a1 a9 b1 b9 c1 c9 activite.png bc-lampe.jpg comparaison.py
-echo {a..g..2}{1..7..2}
-a1 a3 a5 a7 c1 c3 c5 c7 e1 e3 e5 e7 g1 g3 g5 g7
-echo *.{jpg,png}
-activite.png bc-lampe.jpg
-echo {a..c}*.???
-activite.png bc-lampe.jpg</pre>
-
-</article></slide><slide class=""><hgroup><h2>Affichages de caractères spéciaux</h2></hgroup><article  id="affichages-de-caractères-spéciaux" class="smaller ">
-
-<p>En Bash, certains caractères (<code>*</code>, <code>$</code>, <code>?</code>, <code>&gt;</code>, <code>&amp;</code>) jouent un rôle spécial et ne peuvent pas être affichés simplement.</p>
-
-<pre class = 'prettyprint lang-bash'>echo $
-$
-echo $1 # paramètre positionnel 1
-
-echo $$ # process ID du script
- 20105
-echo $? # statut de sortie de la dernière commande
- 0
-echo *
-hg19_order.fa sample_19098-007.log sample_19098-007.sam fichier.gp trace.png 
-echo &gt; # redirection
-bash: syntax error near unexpected token ‘newline’
-</pre>
-
-<p>Pour les afficher, il faut les désactiver (les <em>échapper</em>) avec <code>\</code></p>
-
-<pre class = 'prettyprint lang-bash'>echo \*</pre>
-
 </article></slide><slide class=""><hgroup><h2>Raccourcis utiles</h2></hgroup><article  id="raccourcis-utiles" class="smaller ">
 
 <p>Il est possible d’éviter de taper entièrement une commande: <strong>utiliser la complétion par <code>TAB</code></strong></p>
@@ -635,28 +544,6 @@ bash: syntax error near unexpected token ‘newline’
 <p>Lister l’historique:</p>
 
 <pre class = 'prettyprint lang-bash'>history 30 # 30 dernières commandes</pre>
-
-</article></slide><slide class=""><hgroup><h2>Customisation avancée</h2></hgroup><article  id="customisation-avancée" class="smaller ">
-
-<p>Modification du prompt: il est défini par la variable <code>$PS1</code></p>
-
-<pre class = 'prettyprint lang-bash'>echo $PS1
-
-\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\
-[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$</pre>
-
-<p>Fichiers de configuration</p>
-
-<pre class = 'prettyprint lang-bash'>.bash_profile
-.bashrc</pre>
-
-<p>Ajouts de raccourcis (&lsquo;alias&rsquo;) soit dans <strong>.bash_aliases</strong>, soit dans <strong>.bash_profiles</strong></p>
-
-<pre class = 'prettyprint lang-bash'>alias ll=&#39;ls -la&#39; # Pas d&#39;espaces autour du signe &#39;=&#39;</pre>
-
-<p>Voir les variables d’environnement</p>
-
-<pre class = 'prettyprint lang-bash'>env</pre>
 
 </article></slide><slide class=""><hgroup><h2>Manipulation de fichier</h2></hgroup><article  id="manipulation-de-fichier" class="smaller ">
 
@@ -734,7 +621,7 @@ bash: syntax error near unexpected token ‘newline’
 
 <p>(*) Extrait de <a href='https://www.rs-online.com/designspark/an-intro-to-linux-file-system-management' title=''>https://www.rs-online.com/designspark/an-intro-to-linux-file-system-management</a></p>
 
-</article></slide><slide class=""><hgroup><h2>Quelques exemples de navigation dans l’arbrescence à l’aide de la commande cd</h2></hgroup><article  id="quelques-exemples-de-navigation-dans-larbrescence-à-laide-de-la-commande-cd" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quelques exemples de navigation dans l’arbrescence à l’aide de la commande <code>cd</code></h2></hgroup><article  id="quelques-exemples-de-navigation-dans-larbrescence-à-laide-de-la-commande-cd" class="smaller ">
 
 <pre class = 'prettyprint lang-bash'>cd /bin
 cd /usr/bin
@@ -744,6 +631,121 @@ cd ..
 cd ../.. # Remonter deux niveaux
 cd .
 cd </pre>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Seconde Partie: Utilisation de linux plus avancé</h2></hgroup><article  id="seconde-partie-utilisation-de-linux-plus-avancé" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2>Commandes d’environnement</h2></hgroup><article  id="commandes-denvironnement" class="smaller ">
+
+<div class="columns-2">
+<p>Qui suis-je ?</p>
+
+<pre class = 'prettyprint lang-bash'>whoami</pre>
+
+<p>Où suis-je ?</p>
+
+<pre class = 'prettyprint lang-bash'>hostname</pre>
+
+<p>Information sur votre compte</p>
+
+<pre class = 'prettyprint lang-bash'>id</pre>
+
+<p><br></p>
+
+<p>Information sur votre Système d’exploitation</p>
+
+<pre class = 'prettyprint lang-bash'>uname (-a)</pre>
+
+<p>Changer votre mot de passe (<strong>Ne le faites pas!</strong>)</p>
+
+<pre class = 'prettyprint lang-bash'>passwd</pre>
+
+<p>Qui travaille en ce moment sur le système ?</p>
+
+<pre class = 'prettyprint lang-bash'>w ou who</pre></div>
+
+</article></slide><slide class=""><hgroup><h2>Customisation avancée</h2></hgroup><article  id="customisation-avancée" class="smaller ">
+
+<p>Modification du prompt: il est défini par la variable <code>$PS1</code></p>
+
+<pre class = 'prettyprint lang-bash'>echo $PS1
+
+\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\
+[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$</pre>
+
+<p>Fichiers de configuration</p>
+
+<pre class = 'prettyprint lang-bash'>.bash_profile
+.bashrc</pre>
+
+<p>Ajouts de raccourcis (&lsquo;alias&rsquo;) soit dans <strong>.bash_aliases</strong>, soit dans <strong>.bash_profiles</strong></p>
+
+<pre class = 'prettyprint lang-bash'>alias ll=&#39;ls -la&#39; # Pas d&#39;espaces autour du signe &#39;=&#39;</pre>
+
+<p>Voir les variables d’environnement</p>
+
+<pre class = 'prettyprint lang-bash'>env</pre>
+
+</article></slide><slide class=""><hgroup><h2>Métacaractères/Jokers</h2></hgroup><article  id="métacaractèresjokers" class="smaller ">
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Caractère</th>
+<th align="left">Utilisation</th>
+</tr>
+<tr class="odd">
+<td align="left"><code>*</code></td>
+<td align="left">toute chaîne de caractères, potentiellement vide</td>
+</tr>
+<tr class="even">
+<td align="left"><code>?</code></td>
+<td align="left">exactement un caractère</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>{v1,v2,v3}</code></td>
+<td align="left">exactement un caractère, soit <strong>v1</strong>, soit <strong>v2</strong>, soit <strong>v3</strong></td>
+</tr>
+<tr class="even">
+<td align="left"><code>{v1..v2}</code></td>
+<td align="left">exactement un caractère, entre <strong>v1</strong> à <strong>v2</strong></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>{v1..v2..v3}</code></td>
+<td align="left">exactement un caractère, entre <strong>v1</strong> à <strong>v2</strong> par pas de <strong>v3</strong></td>
+</tr>
+</table>
+
+<p>Exemples:</p>
+
+<pre class = 'prettyprint lang-bash'>echo {a..c}{1,9} {a..c}*
+a1 a9 b1 b9 c1 c9 activite.png bc-lampe.jpg comparaison.py
+echo {a..g..2}{1..7..2}
+a1 a3 a5 a7 c1 c3 c5 c7 e1 e3 e5 e7 g1 g3 g5 g7
+echo *.{jpg,png}
+activite.png bc-lampe.jpg
+echo {a..c}*.???
+activite.png bc-lampe.jpg</pre>
+
+</article></slide><slide class=""><hgroup><h2>Affichages de caractères spéciaux</h2></hgroup><article  id="affichages-de-caractères-spéciaux" class="smaller ">
+
+<p>En Bash, certains caractères (<code>*</code>, <code>$</code>, <code>?</code>, <code>&gt;</code>, <code>&amp;</code>) jouent un rôle spécial et ne peuvent pas être affichés simplement.</p>
+
+<pre class = 'prettyprint lang-bash'>echo $
+$
+echo $1 # paramètre positionnel 1
+
+echo $$ # process ID du script
+ 20105
+echo $? # statut de sortie de la dernière commande
+ 0
+echo *
+hg19_order.fa sample_19098-007.log sample_19098-007.sam fichier.gp trace.png 
+echo &gt; # redirection
+bash: syntax error near unexpected token ‘newline’
+</pre>
+
+<p>Pour les afficher, il faut les désactiver (les <em>échapper</em>) avec <code>\</code></p>
+
+<pre class = 'prettyprint lang-bash'>echo \*</pre>
 
 </article></slide><slide class=""><hgroup><h2>Organisation des droits</h2></hgroup><article  id="organisation-des-droits" class="smaller ">
 
@@ -787,7 +789,7 @@ drwxr-xr-x  2 formation formation     4096 mai   28 15:24 Bureau
 <li><strong>a</strong> = all</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Commande chmod: correspondances de représentation des droits</h2></hgroup><article  id="commande-chmod-correspondances-de-représentation-des-droits" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Commande <code>chmod</code>: correspondances de représentation des droits</h2></hgroup><article  id="commande-chmod-correspondances-de-représentation-des-droits" class="smaller ">
 
 <table class = 'rmdtable'>
 <tr class="header">
@@ -846,7 +848,7 @@ drwxr-xr-x  2 formation formation     4096 mai   28 15:24 Bureau
 </tr>
 </table>
 
-</article></slide><slide class=""><hgroup><h2>Chmod: exemples</h2></hgroup><article  id="chmod-exemples" class="smaller ">
+</article></slide><slide class=""><hgroup><h2><code>chmod</code>: exemples</h2></hgroup><article  id="chmod-exemples" class="smaller ">
 
 <p>Rendre exécutable pour l’utilisateur</p>
 
@@ -860,7 +862,7 @@ drwxr-xr-x  2 formation formation     4096 mai   28 15:24 Bureau
 
 <pre class = 'prettyprint lang-bash'>chmod 744 Miniconda3-py39_4.9.2-Linux-x86_64.sh</pre>
 
-</article></slide><slide class=""><hgroup><h2>Informations détaillées de ls -la</h2></hgroup><article  id="informations-détaillées-de-ls--la" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Informations détaillées de <code>ls -la</code></h2></hgroup><article  id="informations-détaillées-de-ls--la" class="smaller ">
 
 <pre class = 'prettyprint lang-bash'>ls -la
 total 60184
@@ -1105,6 +1107,8 @@ Sauvegarde en : «SRR9005678.fastq.gz»
 
  5% [===&gt;                                      
                                               ] 79 563 695  2,79MB/s  eta 7m 53s</pre>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Partie 3: Gestion des Processus</h2></hgroup><article  id="partie-3-gestion-des-processus" class="smaller ">
 
 </article></slide><slide class=""><hgroup><h2>Gestion des processus</h2></hgroup><article  id="gestion-des-processus" class="smaller ">
 
@@ -1561,7 +1565,7 @@ sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pr
 <li>de lecture et d’écriture</li>
 </ol>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Seconde partie: L’environnement Conda</h2></hgroup><article  id="seconde-partie-lenvironnement-conda" class="smaller ">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>L’environnement Conda</h2></hgroup><article  id="lenvironnement-conda" class="smaller ">
 
 </article></slide><slide class=""><hgroup><h2>Environnement Conda</h2></hgroup><article  id="environnement-conda" class="smaller ">
 
@@ -1665,6 +1669,8 @@ conda update --all</pre>
 <pre class = 'prettyprint lang-bash'>conda env export -n envname &gt; envname.yml
 conda env create --file envname.yml</pre>
 
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Utilisation d’un cluster de calcul sous <em>Slurm</em></h2></hgroup><article  id="utilisation-dun-cluster-de-calcul-sous-slurm" class="smaller ">
+
 </article></slide><slide class=""><hgroup><h2>Cluster de l’IFB</h2></hgroup><article  id="cluster-de-lifb" class="smaller ">
 
 <p>Pour lancer des calculs lourds, nous utilisons le <strong>Cluster de calcul</strong> <strong>IFB-Core</strong> de l’<strong>Institut Français de Bioinformatique:</strong> <a href='https://www.france-bioinformatique.fr/cluster-ifb-core/' title=''>https://www.france-bioinformatique.fr/cluster-ifb-core/</a></p>
@@ -1689,19 +1695,46 @@ conda env create --file envname.yml</pre>
 <li>Il met les jobs <strong>en attente</strong> en attendant leur traitement une fois que les ressources demandées sont disponibles.</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Utilisation pratique</h2></hgroup><article  id="utilisation-pratique" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Utilisation pratique: connection</h2></hgroup><article  id="utilisation-pratique-connection" class="smaller ">
 
-<p>Connection par ssh</p>
+<p>Connection par <code>ssh</code></p>
 
 <pre class = 'prettyprint lang-bash'>ssh user@core.cluster.france-bioinformatique.fr</pre>
+
+</article></slide><slide class=""><hgroup><h2>Visusalisation des jobs courants</h2></hgroup><article  id="visusalisation-des-jobs-courants" class="smaller ">
 
 <p>Liste des jobs de l’utilisateur <em>user</em> tournant sur le cluster</p>
 
 <pre class = 'prettyprint lang-bash'>squeue -u user</pre>
 
-<p>Soumission d’un job</p>
+<p>Liste des jobs de l’utilisateur <em>user</em> tournant sur le cluster</p>
 
-<pre class = 'prettyprint lang-bash'>sbatch ./script.sh</pre>
+<pre class = 'prettyprint lang-bash'>squeue -u user</pre>
+
+</article></slide><slide class=""><hgroup><h2>Partitions</h2></hgroup><article  id="partitions" class="smaller ">
+
+<ul>
+<li><p>Une partition permet de gérer les priorités des jobs:</p>
+
+<ul>
+<li>Partition <code>fast</code>: Pour les <strong>jobs de 0 à 24h</strong> (défaut).</li>
+<li>Partition <code>long</code>: Pour les <strong>jobs de 0 à 30j</strong> (défaut).</li>
+</ul></li>
+</ul>
+
+<p>Pour voir la liste des partitions:</p>
+
+<pre class = 'prettyprint lang-bash'>sinfo</pre>
+
+<p>Un <strong>acompte</strong> (appelé également <strong>projet</strong>) permet de faire de l’<em>accounting</em> au propriétaire du cluster et de voir quel projet consomme des ressources.</p>
+
+<p>Par défaut, les jobs sont soumis au compte <code>démo</code> qui possède 6h de calcul. Dans le cadre de cette formation, nous utilisons l’acompte <code>form_2022_09</code>.</p>
+
+</article></slide><slide class=""><hgroup><h2>Gestion des jobs</h2></hgroup><article  id="gestion-des-jobs" class="smaller ">
+
+<p>Soumission d’un job sur un acompte:</p>
+
+<pre class = 'prettyprint lang-bash'>sbatch -A &lt;acompte&gt; ./script.sh</pre>
 
 <p>Annulation d’un job</p>
 
@@ -1709,7 +1742,7 @@ conda env create --file envname.yml</pre>
 
 </article></slide><slide class=""><hgroup><h2>Formatage d’un script pour soumission</h2></hgroup><article  id="formatage-dun-script-pour-soumission" class="smaller ">
 
-<p>Il faut préciser les variables <code>SBATCH</code> suivantes:</p>
+<p>On peut préciser les variables <code>SBATCH</code> suivantes:</p>
 
 <pre class = 'prettyprint lang-bash'>
 #!/bin/bash
@@ -1717,7 +1750,7 @@ conda env create --file envname.yml</pre>
 #SBATCH --job-name=trimming           # Job name
 #SBATCH --mail-type=END,FAIL          # Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=&lt;user_mail&gt;       # Where to send mail  
-#SBATCH --ntasks=1                    # Run on a single CPU
+#SBATCH --ntasks=1                    # Run on a single core
 #SBATCH --mem=5gb                     # Job memory request
 #SBATCH --time=02:00:00               # Time limit hrs:min:sec
 #SBATCH --output=trimming_%j.log      # Standard output and error log
@@ -1731,9 +1764,13 @@ done
 
 </article></slide><slide class=""><hgroup><h2>Soumission du job</h2></hgroup><article  id="soumission-du-job" class="smaller ">
 
-<p>On soumet le job sur un <em>Acompte</em> (Oblligatoire). Dans le cadre de la formation, l’acompte est <code>form_2022_09</code>:</p>
+<p>On soumet le job sur un <em>Acompte</em> (Obligatoire sinon c’est le compte <code>demo</code> qui est utilisé). Dans le cadre de la formation, l’acompte est <code>form_2022_09</code>:</p>
 
 <pre class = 'prettyprint lang-bash'>sbatch -A form_2022_09 myscript.sh</pre>
+
+<p>On peut surveiller le bon déroulement d’un job par</p>
+
+<pre class = 'prettyprint lang-bash'>squeue -u &lt;username&gt;</pre>
 
 <p>Le résultat de la soumission génère deux sorties:</p>
 
@@ -1742,9 +1779,21 @@ done
 <li>Le cas échéant, l’utilisateur reçoit un e-mail (si spécifié dans les options)</li>
 </ul>
 
-<p>On peut surveiller le bon déroulement d’un job par</p>
+</article></slide><slide class=""><hgroup><h2>Message de l’IFB!</h2></hgroup><article  id="message-de-lifb" class="smaller ">
 
-<pre class = 'prettyprint lang-bash'>squeue -u &lt;username&gt;</pre>
+<pre class = 'prettyprint lang-bash'>
+
+##   ******************************************************************    ##
+##                                                                         ##
+##       Cluster Shutdown for Maintenance on April 4-5-6-7th 2022          ##   
+##                                                                         ##
+##   The cluster and its associated services (RStudio, JupyterLab,         ## 
+##   UseGalaxy, community, my...) will be shutdown for maintenance:        ##
+##    -  from 14:00 on monday April 4th 2022                               ##  
+##    -  to 12:00 (noon) on thursday April 7th 2022                        ##
+##                                                                         ##
+##   L&#39;équipe de support Cluster IFB Core              
+</pre>
 
 </article></slide><slide class=""><hgroup><h2>Licence</h2></hgroup><article  id="licence" class="smaller ">
 

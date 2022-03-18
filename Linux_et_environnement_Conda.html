@@ -1108,6 +1108,53 @@ Sauvegarde en : «SRR9005678.fastq.gz»
  5% [===&gt;                                      
                                               ] 79 563 695  2,79MB/s  eta 7m 53s</pre>
 
+</article></slide><slide class=""><hgroup><h2>Installation de programmes sous Debian</h2></hgroup><article  id="installation-de-programmes-sous-debian" class="smaller ">
+
+<p>L’installation de programmes sous Linux est généralement réservé aux utilisateurs ayant les <strong>permissions</strong> appropriées.</p>
+
+<p>Pour installez un programme dans le système, il faut être <strong>superutilisateur</strong> (<code>root</code>) ou bien faire partie du groupe des <strong>sudoer</strong>, c’est à dire avoir la permission d’utliser la commande <strong>sudo</strong>.</p>
+
+<p>Quelques commandes utiles pour changer d’utilisateur:</p>
+
+<pre class = 'prettyprint lang-bash'>su - # pour passer sur le compte root
+su - &lt;utilisateur&gt; # pour passer sur le compte &#39;utilisateur&#39;</pre>
+
+<p>L’installation se fait par un <strong>gestionnaire de paquets</strong>, qui gère les dépendances et les versions en fonction de la distribution utilisée.</p>
+
+<p>Dans le cas de <strong>Debian</strong> et affiliées (<strong>Ubuntu</strong>, <strong>Mint</strong>), nous utilisons <strong>APT</strong>.</p>
+
+</article></slide><slide class=""><hgroup><h2>Utilisation sommaire d’APT</h2></hgroup><article  id="utilisation-sommaire-dapt" class="smaller ">
+
+<p>Installation d’un programme, par exemple <code>gedit</code>:</p>
+
+<pre class = 'prettyprint lang-bash'>sudo apt-get install gedit
+[sudo] Mot de passe de formation : 
+...
+Souhaitez vous continuer ? [O/n]</pre>
+
+<p>Suppression d’un paquet</p>
+
+<pre class = 'prettyprint lang-bash'>sudo apt-get remove gedit # Supression d&#39;un paquet
+sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pre>
+
+</article></slide><slide class=""><hgroup><h2>Création et exécution de scripts</h2></hgroup><article  id="création-et-exécution-de-scripts" class="smaller ">
+
+<p><strong>But</strong>: Automatiser des tâches.</p>
+
+<p><strong>Principe</strong>: Créer un fichier texte (le <em>script</em>) contenant les instructions à exécuter.</p>
+
+<ul>
+<li><strong>Important</strong>: Le fichier texte doit comporter le &ldquo;<em>sha-bang</em>&rdquo; à la première ligne:</li>
+</ul>
+
+<pre class = 'prettyprint lang-bash'>#!/bin/bash</pre>
+
+<ul>
+<li>Il doit être rendu <strong>exécutable</strong> par la commande <code>chmod</code>:</li>
+</ul>
+
+<pre class = 'prettyprint lang-bash'>chmod +x monscript.sh</pre>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Partie 3: Gestion des Processus</h2></hgroup><article  id="partie-3-gestion-des-processus" class="smaller ">
 
 </article></slide><slide class=""><hgroup><h2>Gestion des processus</h2></hgroup><article  id="gestion-des-processus" class="smaller ">
@@ -1369,63 +1416,9 @@ screen -l # liste les session screen
 screen -r &lt;numero&gt; # récuperer une session screen (attacher)
 screen -d &lt;numero&gt; # détacher une session screen</pre>
 
-</article></slide><slide class=""><hgroup><h2>Installation de programmes sous Debian</h2></hgroup><article  id="installation-de-programmes-sous-debian" class="smaller ">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Quizz</h2></hgroup><article  id="quizz" class="smaller ">
 
-<p>L’installation de programmes sous Linux est généralement réservé aux utilisateurs ayant les <strong>permissions</strong> appropriées.</p>
-
-<p>Pour installez un programme dans le système, il faut être <strong>superutilisateur</strong> (<code>root</code>) ou bien faire partie du groupe des <strong>sudoer</strong>, c’est à dire avoir la permission d’utliser la commande <strong>sudo</strong>.</p>
-
-<p>Quelques commandes utiles pour changer d’utilisateur:</p>
-
-<pre class = 'prettyprint lang-bash'>su - # pour passer sur le compte root
-su - &lt;utilisateur&gt; # pour passer sur le compte &#39;utilisateur&#39;</pre>
-
-<p>L’installation se fait par un <strong>gestionnaire de paquets</strong>, qui gère les dépendances et les versions en fonction de la distribution utilisée.</p>
-
-<p>Dans le cas de <strong>Debian</strong> et affiliées (<strong>Ubuntu</strong>, <strong>Mint</strong>), nous utilisons <strong>APT</strong>.</p>
-
-</article></slide><slide class=""><hgroup><h2>Utilisation sommaire d’APT</h2></hgroup><article  id="utilisation-sommaire-dapt" class="smaller ">
-
-<p>Installation d’un programme, par exemple <code>gedit</code>:</p>
-
-<pre class = 'prettyprint lang-bash'>sudo apt-get install gedit
-[sudo] Mot de passe de formation : 
-...
-Souhaitez vous continuer ? [O/n]</pre>
-
-<p>Suppression d’un paquet</p>
-
-<pre class = 'prettyprint lang-bash'>sudo apt-get remove gedit # Supression d&#39;un paquet
-sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pre>
-
-</article></slide><slide class=""><hgroup><h2>Création et exécution de scripts</h2></hgroup><article  id="création-et-exécution-de-scripts" class="smaller ">
-
-<p><strong>But</strong>: Automatiser des tâches.</p>
-
-<p><strong>Principe</strong>: Créer un fichier texte (le <em>script</em>) contenant les instructions à exécuter.</p>
-
-<ul>
-<li><strong>Important</strong>: Le fichier texte doit comporter le &ldquo;<em>sha-bang</em>&rdquo; à la première ligne:</li>
-</ul>
-
-<pre class = 'prettyprint lang-bash'>#!/bin/bash</pre>
-
-<ul>
-<li>Il doit être rendu <strong>exécutable</strong> par la commande <code>chmod</code>:</li>
-</ul>
-
-<pre class = 'prettyprint lang-bash'>chmod +x monscript.sh</pre>
-
-</article></slide><slide class=""><hgroup><h2>Quelques sources d’information supplémentaires:</h2></hgroup><article  id="quelques-sources-dinformation-supplémentaires" class="smaller ">
-
-<ul>
-<li>Présentation du système Linux: <a href='https://jplu.developpez.com' title=''>https://jplu.developpez.com</a></li>
-<li>Tutoriel de l’ENS: <a href='https://www.tuteurs.ens.fr/unix/' title=''>https://www.tuteurs.ens.fr/unix/</a></li>
-<li><em>Le Système Linux</em> par Matt Welsh (O’Reilly)</li>
-<li>Merci à Laurent Mouchard (Univ. Rouen) pour son cours Linux (L3) qui m’a inspiré certaines diapositives.</li>
-</ul>
-
-</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-1" class="smaller ">
 
 <p>Quelle est la meilleure façon d’éliminer la sortie d’une commande comme <code>ls</code>?</p>
 
@@ -1445,7 +1438,7 @@ sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pr
 <li>d’exécution uniquement</li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-1" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-2" class="smaller ">
 
 <p>La commande <code>uname</code></p>
 
@@ -1465,7 +1458,7 @@ sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pr
 <li><code>ps -f</code></li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-2" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-3" class="smaller ">
 
 <p><code>tar</code> est un logiciel dont la fonction principale est</p>
 
@@ -1485,7 +1478,7 @@ sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pr
 <li><code>ls -w fich1</code></li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-3" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-4" class="smaller ">
 
 <p>Quelle option de <code>grep</code> renvoie les lignes qui ne correspondent pas à l’expression ?</p>
 
@@ -1505,7 +1498,7 @@ sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pr
 <li>renomme <code>rep1</code> en <code>rep2</code></li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-4" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-5" class="smaller ">
 
 <p>Comment se connecter au système par le réseau en mode texte ?</p>
 
@@ -1525,7 +1518,7 @@ sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pr
 <li>2 1 0</li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-5" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-6" class="smaller ">
 
 <p>Que fait <code>cal 8 256</code> ?</p>
 
@@ -1545,7 +1538,7 @@ sudo apt-get purge gedit # Supression d&#39;un paquet et de ses dépendances</pr
 <li>concaténer les messages de la sortie erreur standard</li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-6" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quizz</h2></hgroup><article  id="quizz-7" class="smaller ">
 
 <p>A quoi correspond le caractère <code>|</code> dans le système d’exploitation Unix ?</p>
 
@@ -1730,7 +1723,7 @@ conda env create --file envname.yml</pre>
 
 <p>Par défaut, les jobs sont soumis au compte <code>démo</code> qui possède 6h de calcul. Dans le cadre de cette formation, nous utilisons l’acompte <code>form_2022_09</code>.</p>
 
-</article></slide><slide class=""><hgroup><h2>Gestion des jobs</h2></hgroup><article  id="gestion-des-jobs" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Gestion des jobs sous Slurm</h2></hgroup><article  id="gestion-des-jobs-sous-slurm" class="smaller ">
 
 <p>Soumission d’un job sur un acompte:</p>
 
@@ -1794,6 +1787,15 @@ done
 ##                                                                         ##
 ##   L&#39;équipe de support Cluster IFB Core              
 </pre>
+
+</article></slide><slide class=""><hgroup><h2>Quelques sources d’information supplémentaires:</h2></hgroup><article  id="quelques-sources-dinformation-supplémentaires" class="smaller ">
+
+<ul>
+<li>Présentation du système Linux: <a href='https://jplu.developpez.com' title=''>https://jplu.developpez.com</a></li>
+<li>Tutoriel de l’ENS: <a href='https://www.tuteurs.ens.fr/unix/' title=''>https://www.tuteurs.ens.fr/unix/</a></li>
+<li><em>Le Système Linux</em> par Matt Welsh (O’Reilly)</li>
+<li>Merci à Laurent Mouchard (Univ. Rouen) pour son cours Linux (L3) qui m’a inspiré certaines diapositives.</li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>Licence</h2></hgroup><article  id="licence" class="smaller ">
 

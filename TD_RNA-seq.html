@@ -64,6 +64,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -84,6 +85,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -613,7 +617,7 @@ igv</code></pre>
 <div id="td-comptage-des-reads" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> TD: Comptage des reads</h2>
 <ul>
-<li>Installer l’utilitaire <code>featurecounts</code> (avec s) dans l’environnement Conda <code>rnaseq</code> (package <code>subread</code>)</li>
+<li>Installer l’utilitaire <code>featureCounts</code> (avec s) dans l’environnement Conda <code>rnaseq</code> (package <code>subread</code>)</li>
 <li>Appliquer <code>featureCounts</code> sur les fichiers BAM obtenus par STAR pour obtenir un fichier de comptage en format texte délimité par des tabulation.</li>
 </ul>
 <div id="solution-6" class="section level3" number="5.1.1">
@@ -637,7 +641,7 @@ featureCounts -a gencode.v38.annotation.gtf -o counts_GSE130657_subsampled.txt  
 
 # Puis faire tourner la commande suivante:
 
-sbatch -A form_2022_09 featurecount_all.sh 
+sbatch -A form_2022_09 featurecount.sh 
 
 watch squeue -u &lt;username&gt;
 </code></pre>

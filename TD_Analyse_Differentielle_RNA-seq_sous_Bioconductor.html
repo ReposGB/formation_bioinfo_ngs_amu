@@ -523,8 +523,8 @@ y$samples</code></pre>
 <p>PlotBCV = Plot Biological Coefficient of Variation</p>
 <pre class="r"><code>plotBCV(y)</code></pre>
 </div>
-<div id="test-pour-les-gènes-différentiellement-exprimés" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Test pour les gènes différentiellement exprimés</h2>
+<div id="test-pour-les-gènes-significativement-différentiellement-exprimés" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Test pour les gènes significativement différentiellement exprimés</h2>
 <p>Une fois la dispersion calculée, on peut ensuite appliquer le test exact par la fonction <code>exactTest</code>. Ce test vérifie l’hypothèse nulle sur l’expression différentielle des gènes sur les deux conditions comparées en utilisant une distribution binomiale négative.</p>
 <pre class="r"><code>et &lt;- exactTest(y)</code></pre>
 </div>
@@ -532,7 +532,7 @@ y$samples</code></pre>
 <h2><span class="header-section-number">6.4</span> Extraction des gènes par topTags</h2>
 <p>La fonction <code>topTags</code> permet d’extraire le résultat du test pour chaque gène, en y appliquant des filtres (test multiples, tri, n).</p>
 <p>Exercice:</p>
-<p>On sort les 1000 gènes les plus différentiellement exprimés par la fonction <code>topTags</code>. Ensuite, on sauve le résultat dans un fichier <code>top.diff.simple.test.txt</code> au format <strong>texte délimité par des tabulations</strong>.</p>
+<p>On sort les 1000 gènes les plus significativement exprimés par la fonction <code>topTags</code> (p-valeurs ajustées les plus significatives). Ensuite, on sauve le résultat dans un fichier <code>top.diff.simple.test.txt</code> au format <strong>texte délimité par des tabulations</strong>.</p>
 <div id="solution-3" class="section level3" number="6.4.1">
 <h3><span class="header-section-number">6.4.1</span> Solution</h3>
 </div>

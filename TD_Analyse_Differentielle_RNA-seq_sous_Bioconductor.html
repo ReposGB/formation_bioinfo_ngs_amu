@@ -64,6 +64,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -84,6 +85,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -511,6 +515,7 @@ y$samples</code></pre>
 <p>edgeR utilise un estimateur de dispersion appelé <em>quantile-adjusted conditional maximum likelihood</em> (<strong>qCML</strong>) pour les expérimentations avec un facteur unique.</p>
 <p>Pour les designs plus compliqués, il utilise le <em>Cox-Reid profile-adjusted likelihood</em> (CR) associé à un modèle généralisé linéaire (<em>GLM</em>) pour tenir compte de toutes les sources de variations.</p>
 <p>Je propose de travailler d’abord avec <strong>qCML</strong> puis de refaire une analyse avec <strong>CR</strong> et de faire une comparaison du résultat.</p>
+<pre class="r"><code>y &lt;- estimateDisp(y)</code></pre>
 <pre><code>## Using classic mode.</code></pre>
 </div>
 <div id="visualisation-de-la-dispersion-par-plotbcv" class="section level2" number="6.2">

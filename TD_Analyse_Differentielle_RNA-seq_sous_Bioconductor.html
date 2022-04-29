@@ -64,7 +64,6 @@ if (window.hljs) {
 
 
 
-
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -85,9 +84,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -339,6 +335,18 @@ div.tocify {
 <p>Remplacer les en-têtes de colonnes de <code>expression_raw_counts</code> par le nom de l’échantillon pour correspondre aux lignes du tableau <code>targets</code>.</p>
 <div id="solution" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Solution:</h3>
+<pre class="r"><code># Charger les données
+expression_raw_counts &lt;- read.table(&quot;counts_GSE130657.txt&quot;, sep=&#39;\t&#39;, header = TRUE, )
+targets &lt;- read.table(&quot;targets_GSE130657.txt&quot;, sep=&#39;\t&#39;, header = TRUE)
+
+
+cnames_1 &lt;- gsub(&quot;staraligned.&quot;, &quot;&quot;, colnames(expression_raw_counts))
+cnames_2 &lt;- gsub(&quot;.trim_Aligned.sortedByCoord.out.bam&quot;, &quot;&quot;, cnames_1)
+colnames(expression_raw_counts) &lt;- cnames_2</code></pre>
+<pre class="r"><code># Visualiser les données
+
+View(targets)
+View(expression_raw_counts)</code></pre>
 </div>
 </div>
 <div id="id-conversion-with-biomart" class="section level2" number="2.4">
@@ -435,6 +443,13 @@ head(expression_annotation)</code></pre>
 </ul>
 <div id="solution-1" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Solution:</h3>
+<pre class="r"><code>keep &lt;- filterByExpr(y, min.total.count=100, min.prop = 0.6, min.count=15) &amp;
+        !is.na(y$genes$entrezgene_id) &amp;
+        !is.na(y$genes$hgnc_symbol)
+
+y &lt;- y[keep, , keep.lib.sizes=FALSE]
+
+# Le `keep.lib.sizes=FALSE` force le re-calcul des tailles de librairies.</code></pre>
 </div>
 </div>
 </div>
@@ -456,6 +471,10 @@ title(&quot;Library sizes&quot;)</code></pre>
 <li>Ajouter au graphe une ligne horizontale matérialisant les médianes des CPMs.</li>
 </ul>
 <p>Solution:</p>
+<pre class="r"><code>logcounts &lt;- cpm(y, log=TRUE)
+boxplot(logcounts, xlab=&quot;&quot;, ylab=&quot;Log2 counts per million&quot;, las=2)
+abline(h=median(logcounts), col=&quot;blue&quot;)
+title(&quot;Boxplots of logCPMs (unnormalised)&quot;)</code></pre>
 </div>
 <div id="plots-qc-distribution-des-comptages" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Plots QC: Distribution des comptages</h2>
@@ -472,6 +491,11 @@ legend(&quot;topright&quot;, legend=unique(targets$Treatment), col, lwd=2, cex =
 <p>Faire une couleur unique par échantillons</p>
 <div id="solution-2" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Solution</h3>
+<pre class="r"><code># Couleur unique par échantillons
+col &lt;- unique(palette()[as.factor(targets$Sample)])
+plotDensity(log10(expression_counts + epsilon), lty=1, col)
+grid()
+legend(&quot;topright&quot;, legend=unique(targets$Sample), col, lwd=2, cex = 0.7)</code></pre>
 </div>
 </div>
 </div>
@@ -535,6 +559,16 @@ y$samples</code></pre>
 <p>On sort les 1000 gènes les plus significativement exprimés par la fonction <code>topTags</code> (p-valeurs ajustées les plus significatives). Ensuite, on sauve le résultat dans un fichier <code>top.diff.simple.test.txt</code> au format <strong>texte délimité par des tabulations</strong>.</p>
 <div id="solution-3" class="section level3" number="6.4.1">
 <h3><span class="header-section-number">6.4.1</span> Solution</h3>
+<pre class="r"><code>tt &lt;- topTags(et, adjust.method = &quot;BH&quot;, sort.by = c(&quot;PValue&quot;), n=1000)
+colnames(tt)</code></pre>
+<pre><code>##  [1] &quot;ensembl_gene_id_version&quot; &quot;entrezgene_id&quot;          
+##  [3] &quot;hgnc_symbol&quot;             &quot;Chr&quot;                    
+##  [5] &quot;Start&quot;                   &quot;End&quot;                    
+##  [7] &quot;Strand&quot;                  &quot;Length&quot;                 
+##  [9] &quot;logFC&quot;                   &quot;logCPM&quot;                 
+## [11] &quot;PValue&quot;                  &quot;FDR&quot;</code></pre>
+<pre class="r"><code>write.table(tt, file = &quot;top.diff.simple.test.txt&quot;, sep = &quot;\t&quot;, 
+            row.names = F, quote = FALSE)</code></pre>
 </div>
 </div>
 </div>
@@ -574,6 +608,38 @@ design</code></pre>
 </div>
 <div id="solution-4" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Solution</h2>
+<pre class="r"><code># Créer une matrice de design en **spécifiant les échantillons dans l&#39;intersection** (terme `~Sample` dans l&#39;appel à `model.matrix`).
+
+
+Sample &lt;- factor(targets$Sample)
+Treatment &lt;- factor(targets$Treatment)
+
+design &lt;- model.matrix(~Sample+Treatment)
+colnames(design) &lt;- gsub(&quot;group&quot;, &quot;&quot;, colnames(design))
+
+rownames(design) &lt;- colnames(y)
+
+
+# Nous utilisons un modèle basé sur la quasi-likelihood (QL), plus robuste en cas de design multi-factoriel (Fonction `glmQLFit`).
+
+# On ajoute l&#39;argument design dans le calcul de dispersion.
+
+y &lt;- estimateDisp(y, design = design)
+fit &lt;- glmQLFit(y, design)
+
+
+# On peut donc ensuite appliquer le test de détection des gènes différentiellement exprimés.
+
+qlf &lt;- glmQLFTest(fit)
+
+
+# On extrait les gènes différentiellement exprimés avec topTags
+
+
+tt &lt;- topTags(qlf, adjust.method = &quot;BH&quot;, sort.by = c(&quot;PValue&quot;), n=1000)
+colnames(tt)
+write.table(tt, file = &quot;top.diff.qlf.txt&quot;, sep = &quot;\t&quot;, 
+            row.names = F, quote = FALSE)</code></pre>
 </div>
 <div id="sauver-les-objets-dans-un-fichier" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> Sauver les objets dans un fichier</h2>

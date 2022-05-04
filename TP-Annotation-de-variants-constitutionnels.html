@@ -253,9 +253,9 @@ div.tocify {
 <p><br> <br> <br> <br></p>
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Lors de ce TP, nous allons poursuivre l’analyse des variants détectés lors du TD précédent sur les données générées par Nikitin <em>et al.</em>: (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7273971/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7273971/</a>).</p>
+<p>Lors de ce TP, nous allons poursuivre l’analyse des variants détectés lors du TP précédent sur les données générées par Nikitin <em>et al.</em>: (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7273971/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7273971/</a>).</p>
 <p>Nous allons maintenant utiliser les <strong>bases de données d’annotations publiques</strong> de variants pour les <strong>annoter</strong>, ce qui permettra de les interpréter.</p>
-<p>La collection de l’information d’annotation biologique connue dans les bases publiques se fait gràace à des programmes spécialisés. Nous allons en explorer 2 dans ce TD: <strong>snpEff</strong> et <strong>Annovar</strong>.</p>
+<p>La collection de l’information d’annotation biologique connue dans les bases publiques se fait grâce à des programmes spécialisés. Nous allons en explorer 2 dans ce TP: <strong>snpEff</strong> et <strong>Annovar</strong>.</p>
 <p>Pour rappel, les variants ont été stockés dans un fichier au format gVCF disponible sur le cluster IFB:</p>
 <p><code>/shared/projects/form_2022_09/data/DNA-seq_PRJNA588789_Variants/all.sample.filtered.vcf.gz</code></p>
 <p>Le fichier est également disponible sur MyCore:</p>
@@ -269,8 +269,8 @@ div.tocify {
 </div>
 <div id="analyse-du-fchier-vcf-avant-annotation" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Analyse du fchier VCF avant annotation</h2>
-<div id="td" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> TD:</h3>
+<div id="tp" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> TP:</h3>
 <ol style="list-style-type: decimal">
 <li>Récupérer le fichier <code>all.sample.filtered.vcf.gz</code>dans un répertoire de travail et le décompresser.</li>
 </ol>
@@ -299,7 +299,7 @@ div.tocify {
 </div>
 <div id="visualisation" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Visualisation</h2>
-<p>TD:</p>
+<p>TP:</p>
 <p>Visualiser le fichier VCF multi-échantillons conjointement avec les fichiers BAM grâce au programme IGV.</p>
 </div>
 <div id="annotation" class="section level2" number="1.4">
@@ -317,7 +317,7 @@ div.tocify {
 <li>Support de Sequence Ontology</li>
 <li>Compatible <strong>GATK</strong> en natif.</li>
 </ul>
-<div id="tp" class="section level3" number="1.5.1">
+<div id="tp-1" class="section level3" number="1.5.1">
 <h3><span class="header-section-number">1.5.1</span> TP</h3>
 <ol style="list-style-type: decimal">
 <li><p>Parcourir la documentation de SnpEff : <a href="http://pcingola.github.io/SnpEff/" class="uri">http://pcingola.github.io/SnpEff/</a> . Installer la base de données d’annotation pour l’humain <code>hg38</code>.</p></li>
@@ -340,8 +340,8 @@ div.tocify {
 </ul>
 <p>Annovar n’est <strong>pas directement disponible</strong> dans conda, il faut l’installer à partir du site <a href="https://annovar.openbioinformatics.org/en/latest/" class="uri">https://annovar.openbioinformatics.org/en/latest/</a></p>
 <p>Lien de téléchargemment: <a href="http://www.openbioinformatics.org/annovar/download/0wgxR2rIVP/annovar.latest.tar.gz" class="uri">http://www.openbioinformatics.org/annovar/download/0wgxR2rIVP/annovar.latest.tar.gz</a></p>
-<div id="td-1" class="section level3" number="1.6.1">
-<h3><span class="header-section-number">1.6.1</span> TD</h3>
+<div id="tp-2" class="section level3" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> TP</h3>
 <p>Pour des facilités d’analyse, j’ai installé Annovar dans le répertoire partagé <code>/shared/projects/form-2021-018/data/annovar</code>.</p>
 <p>Il est installé avec les bases de données suivantes:</p>
 <ul>

@@ -374,14 +374,13 @@ div.tocify {
 <h2><span class="header-section-number">4.1</span> Contrôle qualité Fastqc</h2>
 <p><strong>TD:</strong></p>
 <ol style="list-style-type: decimal">
-<li>Faire le contrôle qualité des données avec <code>fastqc</code></li>
-<li>Grouper les résultats sous un rapport unique avec <code>multiqc</code></li>
+<li>Faire le contrôle qualité des données avec <code>fastqc</code>.</li>
 </ol>
 <p>Le script <code>fastqc_all.sh</code> exécute <code>fastqc</code>.</p>
 <pre class="bash"><code>./fastqc_all.sh</code></pre>
-<p>On peut ensuite lancer <code>multiqc</code>.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>Puis ouvrir le fichier <code>multiqc.html</code>avec Firefox et faire un bilan de la qualité des données, en particulier:</li>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Grouper les résultats sous un rapport unique avec <code>multiqc</code> (On peut lancer <code>multiqc</code> une fois les jobs précédent finis).</p></li>
+<li><p>Puis ouvrir le fichier <code>multiqc.html</code>avec Firefox et faire un bilan de la qualité des données, en particulier:</p></li>
 </ol>
 <ul>
 <li>Quelle information a-t-on à disposition ?</li>
@@ -416,7 +415,7 @@ div.tocify {
 <p>Il faut récupérer le fichier <strong>fasta</strong> mais aussi les indexes associés (Fichiers <strong>dict</strong>, <strong>alt</strong>, <strong>amb</strong> <strong>ann</strong>, <strong>bwt</strong>, <strong>pac</strong>, <strong>sa</strong> et <strong>fai</strong>).</p>
 <p>Ces données sont dans le répertoire <code>hg38.genome</code>.</p>
 <p>De plus, nous allons filtrer les alignements sur les gènes utilisés lors de la capture. Pour cela, il faut spécifier les régions séquencées grâce à un fichier <strong>BED</strong>.</p>
-<p>Il est possible de créer ce fichier sur l’outil <strong>hgTables</strong> du site de l’<strong>UCSC</strong>: <a href="https://genome.ucsc.edu/cgi-bin/hgTables" class="uri">https://genome.ucsc.edu/cgi-bin/hgTables</a>. Pour les besoins de ce TD, il a déjà été créé et est présent dans le répertoire: <code>nikitin_et_al.bed</code>.</p>
+<p>Il est possible de créer ce fichier sur l’outil <strong>hgTables</strong> du site de l’<strong>UCSC</strong>: <a href="https://genome.ucsc.edu/cgi-bin/hgTables" class="uri">https://genome.ucsc.edu/cgi-bin/hgTables</a>. Pour les besoins de ce TD, il a déjà été créé et est présent dans le fichier: <code>nikitin_et_al.bed</code>.</p>
 <p><strong>TD:</strong></p>
 <ol style="list-style-type: decimal">
 <li>Analyser le script <code>bwa_align_all.sh</code>:</li>
@@ -446,7 +445,7 @@ div.tocify {
 <p><strong>TD:</strong></p>
 <ol style="list-style-type: decimal">
 <li>Exécuter le script <code>mark_duplicate_all.sh</code>.</li>
-<li>S’en inspoirer pour concevoir le script <code>add_readgroups_all.sh</code>. (Aide: ajouter les options suivantes à <strong>picard</strong>: <code>RGID=4 RGLB=lib1 RGPL=ILLUMINA RGPU=unit1 RGSM=20</code>).</li>
+<li>S’en inspirer pour concevoir le script <code>add_readgroups_all.sh</code>. (Aide: ajouter les options suivantes à <strong>picard</strong>: <code>RGID=4 RGLB=lib1 RGPL=ILLUMINA RGPU=unit1 RGSM=20</code>).</li>
 </ol>
 <div id="solution-1" class="section level3" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Solution</h3>

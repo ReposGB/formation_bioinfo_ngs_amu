@@ -488,12 +488,15 @@ div.tocify {
 <h2><span class="header-section-number">7.1</span> Appel de variants par échantillons</h2>
 <p>Maintenant que les fichiers <strong>BAM</strong> sont prêts, nous allons faire un appel de variants par échantillons et générer des fichiers <strong>GVCF</strong>.</p>
 <p>Cela se fait par <strong>GATK HaplotypeCaller</strong>. Cet outil effectue une <strong>Réalignement local</strong> pour optimiser la recherche d’INDELS et renvoie un fichier <strong>GVCF</strong> et un fichier <strong>BAM</strong> contenant les <strong>séquences réalignées</strong>. C’est donc une opération <strong>très coûteuse en temps de calcul</strong>.</p>
+<blockquote>
+<p>Attention, <strong>GATK HaplotypeCaller</strong> est concu uniquement pour les analyses en constitutionnel.</p>
+</blockquote>
 <p><strong>TD:</strong></p>
 <ol style="list-style-type: decimal">
 <li><p>Lire la documentation de <strong>GATK HaplotypeCaller</strong>.</p></li>
 <li><p>Prendre modèle sur l’un des scripts précédents pour créer un script appelé <code>variantcall_gvcf.sh</code> et l’utiliser pour faire l’appel de variants sur les fichiers <code>*bam.recalibrated</code>.</p></li>
 </ol>
-<p><strong>Attention</strong>: spécifier l’option suivante: <code>gatk --java-options &quot;-Xmx16g&quot; HaplotypeCaller...</code></p>
+<p><strong>Attention</strong>: appeler <code>gatk</code> avec les options suivante: - <code>gatk --java-options &quot;-Xmx16g&quot; HaplotypeCaller...</code> pour augmenter la mémoire allouée à <strong>Java</strong>. - <code>-ERC GVCF</code>pour spécifier le format de fichier de sortie <strong>GVCF</strong>.</p>
 <div id="solution-3" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Solution</h3>
 </div>
@@ -520,6 +523,9 @@ div.tocify {
 <ol start="2" style="list-style-type: decimal">
 <li>L’exécuter</li>
 </ol>
+<div id="solution-4" class="section level3" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Solution</h3>
+</div>
 </div>
 <div id="filtrage-des-variants" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Filtrage des variants</h2>
@@ -533,10 +539,10 @@ div.tocify {
 <p><strong>TD:</strong></p>
 <p>Le script de filtrage des variants existe déjà (<code>filter_variants.sh</code>) mais ne comporte que l’appel à <strong>GATK VariantRecalibrator</strong>.</p>
 <ol style="list-style-type: decimal">
-<li><strong>Ajouter</strong> un appel à <strong>GATK ApplyVQSR</strong> en tenant compte des sorties de <strong>GATK VariantRecalibrator</strong> et en spécifiant une sensibilité de 0.95.</li>
+<li><strong>Ajouter</strong> un appel à <strong>GATK ApplyVQSR</strong> en tenant compte des sorties de <strong>GATK VariantRecalibrator</strong> et en spécifiant une sensibilité de 0.95. <strong>Spécifier</strong> le nom de fichier de sortie suivant: <code>all.sample.filtered.vcf.gz</code>.</li>
 <li><strong>Exécuter</strong> le script.</li>
 </ol>
-<div id="solution-4" class="section level3" number="7.3.1">
+<div id="solution-5" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Solution</h3>
 </div>
 </div>
@@ -554,7 +560,7 @@ div.tocify {
 <li>Le fichier <strong>VCF</strong> final avec l’ensemble des échantillons.</li>
 <li>Ensuite, se placer sur le gène <strong>MLH1</strong>. Identifier les <strong>SNPS et INDELSs</strong>.</li>
 </ul>
-<div id="solution-5" class="section level3" number="8.0.1">
+<div id="solution-6" class="section level3" number="8.0.1">
 <h3><span class="header-section-number">8.0.1</span> Solution</h3>
 <p><br> <br> <br> <br></p>
 <hr />

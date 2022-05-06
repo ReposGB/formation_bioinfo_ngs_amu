@@ -390,9 +390,9 @@ cd annovar
 ./annotate_variation.pl -buildver hg38 -downdb -webfrom annovar gnomad_genome humandb/
 ./annotate_variation.pl -buildver hg38 -downdb -webfrom annovar ljb26_all  humandb/</code></pre>
 <p>Voici un exemple d’utilisation avec les bases de donneés <code>exac03</code> et <code>avsnp</code>, et l’annotation par RefSeq.:</p>
-<pre class="bash"><code>/shared/projects/form-2021-018/data/annovar/table_annovar.pl SRR10426968.trim.target.vcf /shared/projects/form-2021-018/data/annovar/humandb/
+<pre class="bash"><code>/shared/projects/form_2021_09/data/annovar/table_annovar.pl SRR10426968.trim.target.vcf /shared/projects/form_2022_09/data/annovar/humandb/
 -buildver hg38 -out SRR10426968 -remove -protocol refGene,exac03,avsnp147 
--operation gx,f,f -nastring . -csvout -polish -xref /shared/projects/form-2021-018/data/annovar/example/gene_fullxref.txt 
+-operation gx,f,f -nastring . -csvout -polish -xref /shared/projects/form_2022_09/data/annovar/example/gene_fullxref.txt 
 </code></pre>
 </div>
 <div id="exemple-dutilisation-dannovar" class="section level3" number="1.7.2">

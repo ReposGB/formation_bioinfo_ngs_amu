@@ -351,6 +351,14 @@ div.tocify {
 <p>Il faut ajouter le chemin de <strong>GATK</strong> dans la variable d’environnement <strong>PATH</strong> (fichier <code>.bash_profile</code>).</p>
 <div id="solution" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Solution:</h3>
+<pre class="bash"><code>#Ajouter la ligne suivante dans le fichier  `.bash_profile`:
+PATH=$PATH:/shared/projects/form_2022_09/data/gatk-4.2.2.0
+
+conda create -n dnaseq
+conda activate dnaseq
+
+conda install bwa samtools trimmomatic picard fastqc multiqc r-ggplot2 r-base=4.1.0
+</code></pre>
 </div>
 </div>
 </div>
@@ -449,6 +457,26 @@ div.tocify {
 </ol>
 <div id="solution-1" class="section level3" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Solution</h3>
+<pre class="bash"><code>
+# Script add_readgroups_all.sh:
+
+JOBNAME=--job-name=add_read_groups                # Job name    
+NTASKS=--ntasks=1                                 # Run on 1 cores
+MEM=--mem=1gb                                     # Job memory request
+TIME=--time=12:00:00                              # Time limit hrs:min:sec
+OUTLOG=--output=add_read_groups_%j.log            # Standard output and error log
+
+INDIR=&quot;02-ALIGN&quot;
+
+for bam in $(ls $INDIR/*marked_duplicates.bam)
+do
+
+    out=${bam/.bam/.RG.bam}
+
+    sbatch -A form_2022_09 $JOBNAME $NTASKS $MEM $TIME $OUTLOG --wrap &quot;picard AddOrReplaceReadGroups -I $bam -O $out -RGID 4 -RGLB lib1 -RGPL ILLUMINA -RGPU unit1 -RGSM 20&quot;
+
+done
+</code></pre>
 </div>
 </div>
 <div id="recalibration-de-la-qualité-des-bases" class="section level2" number="6.2">
@@ -478,6 +506,33 @@ div.tocify {
 <p>2.1. Bien utiliser les <strong>4 ressources</strong> cités précédemment dans l’étape <strong>BaseRecalibrator</strong>. 2.2. Ajouter l’étape <strong>ApplyBSQR</strong> et enregistrer les fichiers <strong>BAM</strong> recalibrés dans <code>*.recalibrated.bam</code>.</p>
 <div id="solution-2" class="section level3" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Solution</h3>
+<pre class="bash"><code>
+# script base_recalibrate_all.sh
+
+#!/bin/bash
+
+
+JOBNAME=--job-name=base_recalibrate_all               # Job name    
+NTASKS=--ntasks=1                                     # Run on 1 core
+MEM=--mem=10gb                                        # Job memory request
+TIME=--time=12:00:00                                  # Time limit hrs:min:sec
+OUTLOG=--output=base_recalibrate_all_%j.log           # Standard output and error log
+
+
+INDIR=&quot;02-ALIGN&quot;
+
+#### Note before running GATK: ref genome has to be prepared with
+#### gatk-launch CreateSequenceDictionary -R  hg38.p13/GRCh38.p13.genome.fa
+
+for bam in $(ls $INDIR/*marked_duplicates.RG.bam)
+do
+
+    out=${bam/.bam/.recalibrated.bam}
+    table=${out/.bam/.recal_table.txt}
+
+    sbatch -A form_2022_09 $JOBNAME $NTASKS $MEM $TIME $OUTLOG --wrap &quot;gatk BaseRecalibrator -I $bam -R hg38.genome/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta --known-sites ressources/resources_broad_hg38_v0_1000G_omni2.5.hg38.vcf.gz --known-sites ressources/resources_broad_hg38_v0_1000G_phase1.snps.high_confidence.hg38.vcf.gz  --known-sites ressources/resources_broad_hg38_v0_hapmap_3.3.hg38.vcf.gz --known-sites ressources/resources_broad_hg38_v0_Homo_sapiens_assembly38.dbsnp138.vcf  -O $table; gatk ApplyBQSR -R hg38.genome/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta -I $bam --bqsr-recal-file $table -O $out&quot;
+done
+</code></pre>
 </div>
 </div>
 </div>
@@ -499,6 +554,35 @@ div.tocify {
 <p><strong>Attention</strong>: appeler <code>gatk</code> avec les options suivante: - <code>gatk --java-options &quot;-Xmx16g&quot; HaplotypeCaller...</code> pour augmenter la mémoire allouée à <strong>Java</strong>. - <code>-ERC GVCF</code>pour spécifier le format de fichier de sortie <strong>GVCF</strong>.</p>
 <div id="solution-3" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Solution</h3>
+<pre class="bash"><code>
+# Script variantcall_gvcf.sh:
+
+#!/bin/bash
+
+
+JOBNAME=--job-name=gatk_variant                   # Job name    
+NTASKS=--ntasks=4                                 # Run on 4 cores
+MEM=--mem=20gb                                    # Job memory request
+TIME=--time=12:00:00                              # Time limit hrs:min:sec
+OUTLOG=--output=gatk_variant_%j.log               # Standard output and error log
+
+INDIR=&quot;02-ALIGN&quot;
+OUTDIR=&quot;03-VARCALL&quot;
+mkdir $OUTDIR
+
+
+for bam in $(ls $INDIR/*.recalibrated.bam)
+do
+
+    gvcf=${bam/.bam/.gvcf.gz}
+    gvcf=${gvcf/$INDIR/$OUTDIR}
+
+    bamout=${bam/.bam/.gatk_realigned.bam}
+    
+    sbatch -A form_2022_09 $JOBNAME $NTASKS $MEM $TIME $OUTLOG --wrap &quot;gatk --java-options &quot;-Xmx16g&quot;  HaplotypeCaller -I $bam -R hg38.genome/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta -ERC GVCF -O $gvcf -bamout $bamout&quot;
+
+done
+</code></pre>
 </div>
 </div>
 <div id="consolidation-des-gvcfs-en-un-fichier-vcf-multiéchantillons." class="section level2" number="7.2">
@@ -525,6 +609,14 @@ div.tocify {
 </ol>
 <div id="solution-4" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Solution</h3>
+<pre class="bash"><code>
+# L&#39;étape picard bedToIntervalList crée un fichier d&#39;intervalles à partir du fichier BD.
+
+# L&#39;etape genimicsDB import converti les fichiers GVCF individuels vers une base de données stockées dans &#39;04-VCFDATABASE&#39;.
+
+# Enfin, l&#39;étape GenotypeGVCF converti da la base de données vers un VCF ùultiéchantillons. Ce fichier est &quot;all.sample.raw.vcf.gz&quot;
+.
+</code></pre>
 </div>
 </div>
 <div id="filtrage-des-variants" class="section level2" number="7.3">
@@ -544,6 +636,29 @@ div.tocify {
 </ol>
 <div id="solution-5" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Solution</h3>
+<pre class="bash"><code># script filter_variants.sh complet:
+
+#!/bin/bash
+
+#SBATCH --job-name=filter_variants                          # Job name  
+#SBATCH --ntasks=1                                          # Run on 1 core
+#SBATCH --mem=5gb                                           # Job memory request
+#SBATCH --time=2:00:00                                      # Time limit hrs:min:sec
+#SBATCH --output=filter_variants_%j.log                     # Standard output and error log
+
+
+
+gatk --java-options &quot;-Xmx4g&quot; VariantRecalibrator -R hg38.genome/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta  -V all.sample.raw.vcf.gz  --resource:hapmap,known=false,training=true,truth=true,prior=15.0 ressources/resources_broad_hg38_v0_hapmap_3.3.hg38.vcf.gz --resource:1000G,known=false,training=true,truth=false,prior=10.0 ressources/resources_broad_hg38_v0_1000G_phase1.snps.high_confidence.hg38.vcf.gz --resource:omni,known=false,training=true,truth=false,prior=12.0 ressources/resources_broad_hg38_v0_1000G_omni2.5.hg38.vcf.gz -an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -mode SNP -O output.recal --tranches-file output.tranches --rscript-file output.plots.R --max-gaussians 1
+
+gatk --java-options &quot;-Xmx4g&quot; ApplyVQSR -R hg38.genome/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta  -V all.sample.raw.vcf.gz -O all.sample.filtered.vcf.gz  --truth-sensitivity-filter-level 95.0  --tranches-file output.tranches  --recal-file output.recal
+
+#----------------------------
+
+
+## Appel du script
+
+sbatch -A form_2022_09 ./filter_variants.sh
+</code></pre>
 </div>
 </div>
 </div>
@@ -562,6 +677,8 @@ div.tocify {
 </ul>
 <div id="solution-6" class="section level3" number="8.0.1">
 <h3><span class="header-section-number">8.0.1</span> Solution</h3>
+<pre class="bash"><code># Sélectionner le génome **Human GRch38/hg38)**, puis importer les 4 fichiers `02-ALIGN/*gatk_realigned.bam`.
+#Importer ensuite le fichier contenant les variants `all.sample.filtered.vcf.gz`.</code></pre>
 <p><br> <br> <br> <br></p>
 <hr />
 <div style="text-align: center">

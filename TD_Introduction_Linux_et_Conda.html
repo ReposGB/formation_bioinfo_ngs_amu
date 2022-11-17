@@ -1535,7 +1535,7 @@ fichier.</p></li>
 <li><p>Ajouter les alias suivants de manière permanente dans votre
 environnement</p></li>
 </ul>
-<pre class="bash"><code>cp = &#39;cp -i&#39;
+<pre class="bash"><code>cp = &#39;cp -pi&#39;
 rm = &#39;rm -i&#39;
 mv = &#39;mv -i&#39;</code></pre>
 <ul>
@@ -1554,7 +1554,10 @@ fichier à plusieurs colonnes</h2>
 <ul>
 <li>Télécharger le fichier d’annotations de la levure à l’adresse <a href="ftp://ftp.ensemblgenomes.org/pub/release-37/fungi/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.37.gtf.gz" class="uri">ftp://ftp.ensemblgenomes.org/pub/release-37/fungi/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.37.gtf.gz</a></li>
 <li>Décompresser ce fichier</li>
-<li>Afficher les 5 premières lignes</li>
+<li>Supprimer les lignes commençant par <code>#!</code> et stocker le
+résultat dans un fichier . Afficher les 5 premières lignes des données
+restantes et voir leur structure (indice: utiliser
+<code>grep -v</code>).</li>
 <li>Extraire les 4 premières colonnes dans un fichier texte. Parcourir
 ce fichier avec la commande <code>less</code>.</li>
 <li>Extraire uniquement les lignes correspondant aux gènes et les
@@ -1562,11 +1565,12 @@ stocker dans un fichier <code>SC_genes.txt</code> (indice: utiliser
 <code>grep -P</code>).</li>
 <li>Extraire de <code>SC_genes.txt</code> la colonne contenant les
 identifiants de gènes (exemple <code>&quot;YDL248W&quot;</code>). Il faut que les
-guillemets (“) soient supprimés.</li>
-<li>Créer un fichier texte contenant le nom des gènes présents, leur
-chromosome, leur position chromosomique (début-fin) et le
-<em>strand</em>. En créer une version supplémentaire trié par nom de
-gène.</li>
+guillemets (“) soient supprimés (indice: <code>sed</code>).</li>
+<li>Créer un fichier texte contenant les identifiants
+(<code>gene_id</code>) des gènes présents, leur chromosome, leur
+position chromosomique (début-fin) et le <em>strand</em>. En créer une
+version supplémentaire trié par nom de gène (indice:
+<code>paste</code>).</li>
 </ul>
 <div id="solution-1" class="section level3" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Solution</h3>

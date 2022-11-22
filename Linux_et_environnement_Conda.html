@@ -3361,19 +3361,17 @@ background-size: 60px 60px;
 
 </article></slide><slide class=""><hgroup><h2>Comment interagir avec Linux ?</h2></hgroup><article  id="comment-interagir-avec-linux" class="smaller ">
 
-<p>Nous allons travailler avec la machine Virtuelle <strong>Linux Debian</strong> fournie pour cette formation.</p>
+<ul>
+<li><p>Sur une machine <strong>Linux</strong> ou <strong>MacOS</strong>: Nous utilisons le logiciel <em>Terminal</em> qui permet d’accéder au <strong>Shell</strong>.</p></li>
+<li><p>Sur une machine <strong>Windows</strong>: Il est possible d’utiliser le logiciel <em>MobaXterm</em> pour ouvrir un terminal sur la machine.</p></li>
+<li><p>Sur une <strong>machine distante</strong>: Exemple de l’IFB, connexion par <a href='http://jupyterhub.cluster.france-bioinformatique.fr' title=''>http://jupyterhub.cluster.france-bioinformatique.fr</a></p></li>
+</ul>
 
-<p>Nom d’utilisateur: <em>formation</em>, mot de passe: <em>formation</em></p>
-
-<p>Nous utilisons le logiciel <em>Terminal</em> qui permet d’accéder au <strong>Shell</strong>.</p>
-
-<p>Nous utilisons le <strong>Bourne Again Shell</strong> (<em>bash</em>). Il s’utilise par la saisie d’une ligne de commande, suivi par un appui sur <strong>Entree</strong>.</p>
-
-<p>L’utilisateur (<em>formation</em>) est présenté avec l’invite de commande (<em>prompt</em>) sur la machine (<em>debiancibi</em>)</p>
+<p>Une fois connecté par l’une de ces solutions, nous utilisons le <strong>Bourne Again Shell</strong> (<em>bash</em>). Il s’utilise par la saisie d’une ligne de commande, suivi par un appui sur <strong>Entree</strong>.</p>
 
 <pre class = 'prettyprint lang-bash'>utilisateur@machine:~$</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pour se connecter sur une machine Linux distante</h2></hgroup><article  id="pour-se-connecter-sur-une-machine-linux-distante" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Connection sur une machine Linux distante par <em>ssh</em></h2></hgroup><article  id="connection-sur-une-machine-linux-distante-par-ssh" class="smaller ">
 
 <pre class = 'prettyprint lang-bash'>ssh utilisateur@machine_distante #-ajouter X pour rediriger l&#39;écran graphique</pre>
 
@@ -3506,10 +3504,10 @@ Are you sure you want to continue connecting (yes/no)?
 
 <pre class = 'prettyprint lang-bash'>rm -r rep</pre>
 
-</article></slide><slide class=""><hgroup><h2>Copier et renommer un fichier ou un réperoire</h2></hgroup><article  id="copier-et-renommer-un-fichier-ou-un-réperoire" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Copier et renommer un fichier ou un répertoire</h2></hgroup><article  id="copier-et-renommer-un-fichier-ou-un-répertoire" class="smaller ">
 
 <div class="columns-2">
-<p>Copier un ou plusieurs fichier dans un répertoire</p>
+<p>Copier un ou plusieurs fichier dans un répertoire <code>rep</code></p>
 
 <pre class = 'prettyprint lang-bash'>cp fic1 rep
 cp fic1 fic2 rep</pre>
@@ -3522,15 +3520,17 @@ cp fic1 fic2 rep</pre>
 
 <pre class = 'prettyprint lang-bash'>cp -r rep1 rep2</pre>
 
+<p><br></p>
+
 <p>Renommer un fichier</p>
 
 <pre class = 'prettyprint lang-bash'>mv fic1 fic2</pre>
 
-<p>Déplacer un fichier</p>
+<p>Déplacer un fichier dans <code>rep</code>. Si <code>rep</code> n’existe pas, <code>fic</code> est renommé en <code>rep</code></p>
 
 <pre class = 'prettyprint lang-bash'>mv fic1 rep</pre>
 
-<p>Renommer un réperoire. Si <code>rep2</code> existe, <code>rep1</code>est déplacé <strong>dans</strong> <code>rep2</code>.</p>
+<p>Renommer un répertoire. Si <code>rep2</code> existe, <code>rep1</code> est déplacé <strong>dans</strong> <code>rep2</code>.</p>
 
 <pre class = 'prettyprint lang-bash'>mv rep1 rep2</pre></div>
 
@@ -3552,7 +3552,8 @@ cp fic1 fic2 rep</pre>
 
 <p>Commande alias: Création d’une &ldquo;commande&rdquo; <em>customisée</em>:</p>
 
-<pre class = 'prettyprint lang-bash'>alias ll=&#39;ls -l&#39;</pre>
+<pre class = 'prettyprint lang-bash'>alias ll=&#39;ls -l&#39;       # Affichage &#39;long&#39;
+alias lr=&#39;ls -lrt&#39;     # Affichage des fichiers triés par date (plus récent à la fin)</pre>
 
 <p>Liste des alias courants:</p>
 
@@ -3560,8 +3561,10 @@ cp fic1 fic2 rep</pre>
 
 <p>Quelques alias utiles à ajouter par sécurité:</p>
 
-<pre class = 'prettyprint lang-bash'>cp=&#39;cp -ip&#39; (interactive + preserve)
-rm=&#39;rm -i&#39; (interactive)</pre>
+<pre class = 'prettyprint lang-bash'>cp=&#39;cp -ip&#39; (interactive + preserve date et permissions)
+rm=&#39;rm -i&#39; (interactive)
+mv=&#39;mv -i&#39; (interactive)
+</pre>
 
 </article></slide><slide class=""><hgroup><h2>Nommage des fichiers</h2></hgroup><article  id="nommage-des-fichiers" class="smaller ">
 
@@ -3600,11 +3603,11 @@ rm=&#39;rm -i&#39; (interactive)</pre>
 
 <pre class = 'prettyprint lang-bash'>history 30 # 30 dernières commandes</pre>
 
-</article></slide><slide class=""><hgroup><h2>Manipulation de fichier</h2></hgroup><article  id="manipulation-de-fichier" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Manipulation de fichier teste</h2></hgroup><article  id="manipulation-de-fichier-teste" class="smaller ">
 
-<p>Examen du contenu d’un fichier texte</p>
+<p>Examen du contenu d’un fichier texte:</p>
 
-<p>Télécharger l’exemple de MyCore -&gt; data_Linux -&gt; Fichier VCF</p>
+<p>Télécharger l’exemple sur <a href='http://tinyurl.com/formngs' title=''>http://tinyurl.com/formngs</a> -&gt; data_Linux -&gt; Fichier VCF</p>
 
 <pre class = 'prettyprint lang-bash'>cat SRR10426968.vcf</pre>
 
@@ -3614,7 +3617,7 @@ rm=&#39;rm -i&#39; (interactive)</pre>
 
 <p>Filtrage des lignes d’un fichier texte</p>
 
-<pre class = 'prettyprint lang-bash'>grep &quot;&lt;DEL&gt;&quot; SRR10426968.vcf</pre>
+<pre class = 'prettyprint lang-bash'>grep INDEL SRR10426968.vcf</pre>
 
 <p>Défilement contrôlé: <code>more</code> (mieux: <code>less</code> ;-) )</p>
 
@@ -3704,7 +3707,7 @@ cd </pre>
 
 <pre class = 'prettyprint lang-bash'>id</pre>
 
-<p><br></p>
+<p><br> <br> <br></p>
 
 <p>Information sur votre Système d’exploitation</p>
 

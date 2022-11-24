@@ -1694,6 +1694,13 @@ des gènes (fonction <code>hist</code>).</p></li>
 <li><p>Faire un plot représentant le nombre de gènes par chromosome
 (fonction <code>barplot</code>).</p></li>
 </ol>
+<p><strong>Note</strong>: En cas d’absence de fonctionnalités graphiques
+sur votre machine, il est possible de générer des graphes de la manière
+suivante:</p>
+<pre class="r"><code># Exemple pour générér unfichier PDF:
+pdf(&quot;mon fichier.pdf&quot;)
+hist(rnorm(100))
+dev.off()</code></pre>
 </div>
 <div id="paramètres-descriptifs" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Paramètres

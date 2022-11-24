@@ -1711,13 +1711,14 @@ gènes pour le génome total (<code>feature == &quot;gene&quot;</code>)</p>
 </div>
 <div id="solution" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Solution</h1>
-<pre class="r"><code>######################################
-# Correction TD Partie 3
-######################################
+<pre class="r"><code>################################################################
+#######  Correction TD Partie 3: Manipulation d&#39;objets
+###############################################################@
 
-#### Manipulation d&#39;objets #########
+
 # Exercice 1 - Extraction d&#39;éléments
 # ----------------------------------
+
 gl &lt;- c(&quot;ALK&quot;, &quot;HRAS&quot;, &quot;BRAD&quot;, &quot;AKT1&quot;, &quot;EGFR&quot;)
 
 # 1 
@@ -1788,7 +1789,7 @@ chrs2 &lt;- unlist(strsplit(chrsj, &quot; &quot;))
 identical(chrs2, chrs)
 
 
-# Exercice 5: Tableau de données
+# Exercice 4: Tableau de données
 # ----------------------------
 
 # 1
@@ -1822,6 +1823,102 @@ x$num = num
 # 5
 y &lt;- data.frame(x)
 # Impossible: nombre de lignes différents</code></pre>
+<pre class="bash"><code>##########################################################@##############
+# Correction TD Partie 4 : Etude de données génomiques
+#########################################################################
+
+# Exercice 1: Chargement des données 
+# 1 
+# Dans bash:
+
+gunzip gencode.v38.ENSEMBL.annotation.gtf.gz
+</code></pre>
+<pre class="r"><code># Dans R:
+human.gene.annot &lt;- read.delim(&quot;gencode.v38.ENSEMBL.annotation.gtf&quot;, comment.char=&quot;#&quot;)
+
+names(human.gene.annot) = c(&quot;chromosome name&quot;, &quot;annotation source&quot;, &quot;feature type&quot;, &quot;genomic start location&quot;, &quot;genomic end location&quot;, &quot;score(not used)&quot;, &quot;genomic strand&quot;, &quot;genomic phase (for CDS features)&quot;, &quot;additional information as key-value pairs&quot;)
+# 2
+dim(human.gene.annot)
+
+# 3
+head(human.gene.annot)
+tail(human.gene.annot)
+View(human.gene.annot)
+
+# Exercice 2: Sélection d&#39;un sous-ensemble de données
+
+# 1
+human.gene.annot[12,]
+
+# 2
+human.gene.annot[100:105,]
+
+# 3
+unique(human.gene.annot[,3])
+
+
+# Exercice 3: selection d&#39;un sous ensemble basé sur les valeurs du tableau
+
+# 1
+
+nrow(human.gene.annot[human.gene.annot$`feature type`==&quot;gene&quot;, ])
+
+# ou
+
+nrow(subset(human.gene.annot, `feature type` == &quot;gene&quot;))
+
+# 2
+
+table(human.gene.annot$`feature type`)
+
+# 3
+
+table(human.gene.annot$`chromosome name`)
+
+# 4
+
+table(human.gene.annot$`chromosome name`, human.gene.annot$`feature type`)
+
+# ou
+
+feature.count.table &lt;- table(human.gene.annot[, c(&quot;chromosome name&quot;, &quot;feature type&quot;)])
+feature.count.table
+
+# conversion table vers dataframe
+
+feature.count.matrix &lt;- (apply(as.matrix(feature.count.table), 2 , as.numeric))
+rownames(feature.count.matrix) &lt;- rownames(feature.count.table)
+
+
+# Exercice 4: Manipulation d&#39;un tableau
+
+# 1
+
+length = human.gene.annot$`genomic end location` - human.gene.annot$`genomic start location`
+summary(length)
+
+human.gene.annot$length = length
+
+View(human.gene.annot)
+
+# Exercice: Plot
+
+#1
+
+human.gene.annot.genefeature &lt;- subset(human.gene.annot, `feature type` == &quot;gene&quot;)
+
+hist(log10(human.gene.annot.genefeature$length), breaks = 100)
+
+
+# 2
+
+barplot(table(human.gene.annot.genefeature$`chromosome name`))
+
+# Exercice: Paramètres descriptifs
+
+# 1 
+
+summary(human.gene.annot.genefeature$length)</code></pre>
 <p><br> <br> <br> <br></p>
 <hr />
 <div style="text-align: center">

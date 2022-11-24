@@ -1742,7 +1742,7 @@ demande de garder les gènes:</p>
 <li>Exprimés dans au moins <strong>2</strong> échantillons dans un
 groupe</li>
 <li>Ayant au moins un compte brut de <strong>15</strong> dans au moins
-<strong>1</strong> échantillons</li>
+<strong>1</strong> échantillon</li>
 <li>Ayant au moins un compte brut total de <strong>100</strong></li>
 <li>Ayant un identifiant <code>entrezgene</code> et
 <code>hgnc_symbol</code></li>
@@ -1797,12 +1797,12 @@ compte de ces biais</strong>.</p>
 <pre class="r"><code>y &lt;- calcNormFactors(y, method = &quot;TMM&quot;)
 y$samples</code></pre>
 <pre><code>##            group lib.size norm.factors
-## SRR9005674  THP0 23705619    0.9780126
-## SRR9005675  THP0 22479913    0.9708411
-## SRR9005676  THP0 23475241    0.9856558
-## SRR9005677     M 22782093    1.0282744
-## SRR9005678     M 22222318    1.0257079
-## SRR9005679     M 20846555    1.0130931</code></pre>
+## SRR9005674  THP0 23693608    0.9791059
+## SRR9005675  THP0 22468574    0.9742236
+## SRR9005676  THP0 23462748    0.9838301
+## SRR9005677     M 22768319    1.0282205
+## SRR9005678     M 22209057    1.0248462
+## SRR9005679     M 20833894    1.0112223</code></pre>
 </div>
 <div id="plot-mds-multidimensional-scaling" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Plot MDS
@@ -1857,9 +1857,10 @@ n).</p>
 <p>Exercice:</p>
 <p>On sort les 1000 gènes les plus significativement exprimés par la
 fonction <code>topTags</code> (p-valeurs ajustées les plus
-significatives). Ensuite, on sauve le résultat dans un fichier
-<code>top.diff.simple.test.txt</code> au format <strong>texte délimité
-par des tabulations</strong>.</p>
+significatives) en corrigeant pour les tests multiples par la méthode
+<strong>Benjamini-Hotchberg</strong>. Ensuite, on sauve le résultat dans
+un fichier <code>top.diff.simple.test.txt</code> au format <strong>texte
+délimité par des tabulations</strong>.</p>
 <div id="solution-2" class="section level3" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> Solution</h3>
 </div>

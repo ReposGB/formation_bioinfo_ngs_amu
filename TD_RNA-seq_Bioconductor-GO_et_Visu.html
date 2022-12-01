@@ -1569,7 +1569,11 @@ fonction <code>cpm</code>.</p>
 <code>colorRampPalette</code>. L’autre est un tableau
 <code>sample_annot</code> contenant les annotations des échantillons que
 l’on souhaite afficher sur la heatmap.</p>
-<pre class="r"><code>colors &lt;- rev(colorRampPalette(brewer.pal(10, &quot;RdBu&quot;))(256));
+<pre class="r"><code># Couleur Rouge-&gt; Bleue, puis on applique une inversion
+colors &lt;- rev(colorRampPalette(brewer.pal(10, &quot;RdBu&quot;))(256));
+
+# Pour voir l&#39;ensemble des couleurs disponibles, on peut faire un
+# display.brewer.all()
 
 sample_annot &lt;- data.frame(Treatment=targets$Treatment, Batch=targets$Sample, row.names = targets$SRA_ID)
 
@@ -1614,11 +1618,9 @@ des gènes à partir du tableau
 <code>annotated_expression_counts</code>.</p>
 <pre class="r"><code>selected_gene_count &lt;- expres[significant.genes,]
 
-selected_gene_annot &lt;- annotated_expression_counts[significant.genes, 1:8]
+selected_gene_annot &lt;- y$genes[significant.genes, ]
 
-row.names(selected_gene_count) &lt;- paste(selected_gene_annot$ensembl_gene_id_version,  &#39;[&#39;, selected_gene_annot$hgnc_symbol , &#39;]&#39;)
-
-colors &lt;- rev(colorRampPalette(brewer.pal(10, &quot;RdBu&quot;))(256))</code></pre>
+row.names(selected_gene_count) &lt;- paste(selected_gene_annot$ensembl_gene_id_version,  &#39;[&#39;, selected_gene_annot$hgnc_symbol , &#39;]&#39;)</code></pre>
 <p>On peut réutiliser l’objet <code>sample_annot</code> défini
 précédemment puis faire appel à <code>pheatmap</code> avec les données
 présentes dans <code>selected_gene_count</code>.</p>

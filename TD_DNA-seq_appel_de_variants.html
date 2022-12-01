@@ -1635,11 +1635,18 @@ environnement:</p></li>
 <li><p><strong>r-base</strong> version <strong>4.2.0</strong></p></li>
 </ul>
 <p>Installation de <strong>GATK</strong>:</p>
-<p><strong>GATK</strong> est déjà téléchargé dans le répertoire
-<code>/shared/projects/form_2022_30/data/gatk-4.2.2.0</code>.</p>
-<p>Il faut ajouter le chemin de <strong>GATK</strong> dans la variable
-d’environnement <strong>PATH</strong> (fichier
-<code>.bash_profile</code>).</p>
+<ul>
+<li>Sur le cluster de l’IFB, GATK est déjà installe: faire un
+<code>module load gatk4</code>.</li>
+</ul>
+<p>Sur une machine quelconque:</p>
+<ul>
+<li>Il faut ajouter le chemin de <strong>GATK</strong> dans la variable
+d’environnement <strong>PATH</strong> de la manière suivante:</li>
+</ul>
+<p>Ajouter la ligne suivante dans le fichier
+<code>.bash_profile</code>:</p>
+<p><code>PATH=$PATH:/shared/projects/form_2022_30/data/gatk-4.2.2.0</code></p>
 <div id="solution" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Solution:</h3>
 </div>

@@ -1761,7 +1761,7 @@ groupe</li>
 </ul>
 <div id="solution-1" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Solution:</h3>
-<pre class="r"><code>keep &lt;- filterByExpr(y, min.total.count=100, min.prop = 0.6, min.count=15) &amp;
+<pre class="r"><code>keep &lt;- filterByExpr(y, min.total.count=100, min.prop = 0.66, min.count=15) &amp;
         !is.na(y$genes$entrezgene_id) &amp;
         (y$genes$hgnc_symbol != &quot;&quot;)
 
